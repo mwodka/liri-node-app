@@ -2,29 +2,34 @@ var keys = require('./key');
 var twitter = require('twitter');
 var spotify = require('spotify');
 var request = require('request');
+var fs = require('fs');
 
 var args = process.argv;
+var command = args[2];
+var param = args[3];
 
-switch (args[2]) {
-    case 'my-tweets':
-        myTweets();
-        break;
+function processInput(command, param) {
+    switch (command) {
+        case 'my-tweets':
+            myTweets();
+            break;
 
-    case 'spotify-this-song':
-        spotifyThisSong();
-        break;
+        case 'spotify-this-song':
+            spotifyThisSong(param);
+            break;
 
-    case 'movie-this':
-        movieThis();
-        break;
+        case 'movie-this':
+            movieThis(param);
+            break;
 
-    case 'do-what-it-says':
-        doWhatItSays();
-        break;
+        case 'do-what-it-says':
+            doWhatItSays();
+            break;
 
-    default:
-        console.log('Entry not recognized');
-        break;
+        default:
+            console.log('Entry not recognized');
+            break;
+    }
 }
 
 function myTweets() {
@@ -114,5 +119,19 @@ function movieThis(movieName) {
 }
 
 function doWhatItSays() {
+	
+    fs = require('fs')
+    fs.readFile('random.txt', 'utf8', function(err, data) {
+        if (err) {
+            return console.log(err);
+        }
 
+        var input = data.split(',');
+        var command = input[0];
+        var param = input[1];
+
+        processInput(command, param);
+    });
 }
+
+processInput(command, param);
