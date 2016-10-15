@@ -72,50 +72,30 @@ function spotifyThisSong(str) {
 
 function movieThis(movieName) {
 
-    var queryUrl = 'http://www.omdbapi.com/?t=' + movieName + '&y=&plot=short&tomatoes=true&r=json';
-    if (movieName != null) {
-        request(queryUrl, function(error, response, body) {
-            if (!error && response.statusCode == 200) {
-                // Year the movie came out.
-                logOutput('Released: ' + JSON.parse(body)['Year']);
-                // IMDB Rating of the movie.
-                logOutput("Rating: " + JSON.parse(body)["imdbRating"]);
-                // Country where the movie was produced.
-                logOutput("Country: " + JSON.parse(body)["Country"]);
-                // Language of the movie.
-                logOutput("Language: " + JSON.parse(body)["Language"]);
-                // Plot of the movie.
-                logOutput("Plot: " + JSON.parse(body)["Plot"]);
-                // Actors in the movie.
-                logOutput("Actors: " + JSON.parse(body)["Actors"]);
-                // Rotten Tomatoes Rating.
-                logOutput("Rotten Tomatoes Rating: " + JSON.parse(body)["tomatoRating"]);
-                // Rotten Tomatoes URL.
-                logOutput("Rotten Tomatoes URL: " + JSON.parse(body)["tomatoURL"]);
-            }
-        });
-    } else {
-        request('http://www.omdbapi.com/?t=mr nobody&y=&plot=short&tomatoes=true&r=json', function(error, response, body) {
-            if (!error && response.statusCode == 200) {
-                // Year the movie came out.
-                logOutput('Released: ' + JSON.parse(body)['Year']);
-                // IMDB Rating of the movie.
-                logOutput("Rating: " + JSON.parse(body)["imdbRating"]);
-                // Country where the movie was produced.
-                logOutput("Country: " + JSON.parse(body)["Country"]);
-                // Language of the movie.
-                logOutput("Language: " + JSON.parse(body)["Language"]);
-                // Plot of the movie.
-                logOutput("Plot: " + JSON.parse(body)["Plot"]);
-                // Actors in the movie.
-                logOutput("Actors: " + JSON.parse(body)["Actors"]);
-                // Rotten Tomatoes Rating.
-                logOutput("Rotten Tomatoes Rating: " + JSON.parse(body)["tomatoRating"]);
-                // Rotten Tomatoes URL.
-                logOutput("Rotten Tomatoes URL: " + JSON.parse(body)["tomatoURL"]);
-            }
-        });
+    if (movieName == undefined) {
+        movieName = 'mr nobody';
     }
+    var queryUrl = 'http://www.omdbapi.com/?t=' + movieName + '&y=&plot=short&tomatoes=true&r=json';
+    request(queryUrl, function(error, response, body) {
+        if (!error && response.statusCode == 200) {
+            // Year the movie came out.
+            logOutput('Released: ' + JSON.parse(body)['Year']);
+            // IMDB Rating of the movie.
+            logOutput("Rating: " + JSON.parse(body)["imdbRating"]);
+            // Country where the movie was produced.
+            logOutput("Country: " + JSON.parse(body)["Country"]);
+            // Language of the movie.
+            logOutput("Language: " + JSON.parse(body)["Language"]);
+            // Plot of the movie.
+            logOutput("Plot: " + JSON.parse(body)["Plot"]);
+            // Actors in the movie.
+            logOutput("Actors: " + JSON.parse(body)["Actors"]);
+            // Rotten Tomatoes Rating.
+            logOutput("Rotten Tomatoes Rating: " + JSON.parse(body)["tomatoRating"]);
+            // Rotten Tomatoes URL.
+            logOutput("Rotten Tomatoes URL: " + JSON.parse(body)["tomatoURL"]);
+        }
+    });
 }
 
 function doWhatItSays() {
